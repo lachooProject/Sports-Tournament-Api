@@ -210,6 +210,7 @@ exports.updateStatusCricketMatch = catchAsync(async (req, res, next) => {
     } else {
       match.winner = "Draw";
     }
+    await match.save();
   }
   if (status === "live") {
     if ((toosewon, choosebatting, choosebowling)) {
