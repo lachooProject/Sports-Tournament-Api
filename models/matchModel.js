@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const moment = require("moment-timezone");
 
 const ballStatSchema = new mongoose.Schema({
   ballNumber: { type: Number, required: true },
@@ -22,15 +23,13 @@ const cricketMatchSchema = new mongoose.Schema({
   team2Name: { type: String },
   team2: { type: mongoose.Schema.Types.ObjectId, ref: "Team" },
   date: {
-    type: Date,
-    required: true,
-    set: (value) => {
-      const date = new Date(value);
-      // Add 5 hours 30 minutes (IST offset)
-      date.setMinutes(date.getMinutes() + 330); // 5 * 60 + 30 = 330 minutes
-      return date;
-    },
+  type: Date,
+  required: true,
+  set: (value) => {
+    // Convert the date to IST (Indian Standard Time)
+    return moment.tz(value, "Asia/Kolkata").toDate();
   },
+},
   venue: { type: String, required: true },
   sport: { type: String, default: "cricket" },
   tosewon: {
@@ -88,16 +87,14 @@ const footballMatchSchema = new mongoose.Schema({
   team2Name: { type: String },
   sport: { type: String, default: "football" },
   team2: { type: mongoose.Schema.Types.ObjectId, ref: "Team" },
-  date: {
-    type: Date,
-    required: true,
-    set: (value) => {
-      const date = new Date(value);
-      // Add 5 hours 30 minutes (IST offset)
-      date.setMinutes(date.getMinutes() + 330); // 5 * 60 + 30 = 330 minutes
-      return date;
-    },
+   date: {
+  type: Date,
+  required: true,
+  set: (value) => {
+    // Convert the date to IST (Indian Standard Time)
+    return moment.tz(value, "Asia/Kolkata").toDate();
   },
+},
   venue: { type: String, required: true },
   winner: { type: String },
   score: {
@@ -135,16 +132,14 @@ const badmintonMatchSchema = new mongoose.Schema({
   sport: { type: String, default: "badminton" },
   team2: { type: mongoose.Schema.Types.ObjectId, ref: "Team" },
   player2: { type: mongoose.Schema.Types.ObjectId, ref: "Player" },
-  date: {
-    type: Date,
-    required: true,
-    set: (value) => {
-      const date = new Date(value);
-      // Add 5 hours 30 minutes (IST offset)
-      date.setMinutes(date.getMinutes() + 330); // 5 * 60 + 30 = 330 minutes
-      return date;
-    },
+   date: {
+  type: Date,
+  required: true,
+  set: (value) => {
+    // Convert the date to IST (Indian Standard Time)
+    return moment.tz(value, "Asia/Kolkata").toDate();
   },
+},
   venue: { type: String, required: true },
   winner: { type: String },
   score: {
