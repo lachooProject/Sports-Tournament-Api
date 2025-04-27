@@ -1,3 +1,4 @@
+const AppError = require('./utils/AppError');
 const express = require("express");
 const morgan = require("morgan");
 const globalErrorHandler = require("./controllers/errorController");
