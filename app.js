@@ -43,6 +43,13 @@ app.use("/api/v1/create", createRoute);
 app.use("/api/v2/matchScore", matchScore);
 app.use("/api/v2/admin", playerRoute);
 app.use("/api/v2/main", mainRoute);
+app.get("/", (req, res) => {
+  res.status(200).json({
+    status: "success",
+    message: "API is working!",
+    time: req.requestTime
+  });
+});
 
 app.all("*", (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
